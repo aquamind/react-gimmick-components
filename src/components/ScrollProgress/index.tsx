@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import useScroll from "../../hooks/use-scroll";
 
 type Props = {
   className?: string;
@@ -7,17 +8,12 @@ type Props = {
 
 const ScrollProgress: FC<Props> = ({ className, style = {} }) => {
   const [width, setWidth] = useState("0%");
-  const handleScroll = () => {
-    const bottom = document.body.offsetHeight - window.innerHeight;
-    setWidth(((window.scrollY * 100) / bottom).toFixed(2) + "%");
-  };
+  const { scrollY } = useScroll();
 
   useEffect(() => {
-    document.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      document.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    const bottom = document.body.offsetHeight - window.innerHeight;
+    setWidth(((window.scrollY * 100) / bottom).toFixed(2) + "%");
+  }, [scrollY]);
 
   return (
     <div
