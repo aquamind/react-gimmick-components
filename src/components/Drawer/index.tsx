@@ -3,13 +3,13 @@ import React, {
   FC,
   ReactNode,
   useEffect,
+  useRef,
   useState,
 } from "react";
-import styles from "./style.module.css";
 
 type Props = {
   opened: boolean;
-  duration: Number;
+  duration: number;
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -18,41 +18,36 @@ type Props = {
 const drawerFactory =
   (
     position: CSSProperties,
-    openFrame: string,
-    closeFrame: string,
     openedTransform: string,
     closedTransform: string
   ): FC<Props> =>
   ({ opened, duration, children, className, style }) => {
-    const [animation, setAnimation] = useState<CSSProperties>({
-      transform: closedTransform,
-    });
+    const ref = useRef(null);
     const [current, setCurrent] = useState<boolean>(false);
 
     useEffect(() => {
-      if (current === opened) {
-        setAnimation({
-          transform: current ? openedTransform : closedTransform,
-        });
-        return;
-      }
+      if (current === opened || !ref.current) return;
 
-      setAnimation({
-        animationName: opened ? openFrame : closeFrame,
-        animationDuration: duration + "s",
-        animationFillMode: "forwards",
-      });
+      const element: HTMLElement = ref.current;
+      element.animate(
+        [
+          { transform: opened ? closedTransform : openedTransform },
+          { transform: opened ? openedTransform : closedTransform },
+        ],
+        { duration, fill: "forwards" }
+      );
+
       setCurrent(opened);
     }, [opened]);
 
     return (
       <div
+        ref={ref}
         className={className}
         style={{
           ...style,
           ...position,
           position: "fixed",
-          ...animation,
         }}
       >
         {children}
@@ -62,32 +57,24 @@ const drawerFactory =
 
 export const LeftDrawer = drawerFactory(
   { right: 0 },
-  styles.LeftOpen,
-  styles.LeftClose,
   "translateX(0)",
   "translateX(100%)"
 );
 
 export const RightDrawer = drawerFactory(
   { left: 0 },
-  styles.RightOpen,
-  styles.RightClose,
   "translateX(0)",
   "translateX(-100%)"
 );
 
 export const UpDrawer = drawerFactory(
   { bottom: 0 },
-  styles.UpOpen,
-  styles.UpClose,
   "translateY(0)",
   "translateY(100%)"
 );
 
 export const DownDrawer = drawerFactory(
   { top: 0 },
-  styles.DownOpen,
-  styles.DownClose,
   "translateY(0)",
   "translateY(-100%)"
 );

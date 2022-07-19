@@ -22,20 +22,20 @@ const DownTemplate: ComponentStory<typeof DownDrawer> = (args) => (
 
 const defaultArgs = {
   opened: true,
-  duration: 1,
+  duration: 500,
   children: (
     <div style={{ height: "50vh", width: "50vw", background: "#ff0000" }} />
   ),
 };
 
-export const LeftDefault = LeftTemplate.bind({});
-LeftDefault.args = defaultArgs;
+export const Left = LeftTemplate.bind({});
+Left.args = defaultArgs;
 
-export const RightDefault = RightTemplate.bind({});
-RightDefault.args = defaultArgs;
+export const Right = RightTemplate.bind({});
+Right.args = defaultArgs;
 
-export const UpDefault = UpTemplate.bind({});
-UpDefault.args = defaultArgs;
+export const Up = UpTemplate.bind({});
+Up.args = defaultArgs;
 
-export const DownDefault = DownTemplate.bind({});
-DownDefault.args = defaultArgs;
+export const Down = DownTemplate.bind({});
+Down.args = defaultArgs;
