@@ -1,17 +1,34 @@
-import React, { CSSProperties, FC, ReactNode } from "react";
-import styles from "./style.module.css";
+import React, { CSSProperties, FC, ReactNode, useEffect, useRef } from "react";
 
 type Props = {
-  delay: number;
-  duration: number;
+  delay?: number;
+  duration?: number;
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
 };
 
-const Splash: FC<Props> = ({ delay, duration, className, style, children }) => {
+const Splash: FC<Props> = ({
+  delay = 0,
+  duration = 1000,
+  className,
+  style,
+  children,
+}) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const element: HTMLElement = ref.current;
+    element.animate(
+      [{ opacity: 1 }, { opacity: 0, display: "none", zIndex: -1 }],
+      { duration, delay, fill: "forwards" }
+    );
+  }, [ref]);
+
   return (
     <div
+      ref={ref}
       className={className}
       style={{
         ...style,
@@ -22,10 +39,6 @@ const Splash: FC<Props> = ({ delay, duration, className, style, children }) => {
         left: 0,
         margin: 0,
         padding: 0,
-        animationName: styles.fadeOut,
-        animationDelay: delay + "s",
-        animationDuration: duration + "s",
-        animationFillMode: "forwards",
       }}
     >
       <div

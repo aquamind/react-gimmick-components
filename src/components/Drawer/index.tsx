@@ -49,6 +49,7 @@ const drawerFactory =
           ...style,
           ...position,
           position: "fixed",
+          transform: closedTransform,
         }}
       >
         {children}

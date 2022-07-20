@@ -10,8 +10,8 @@ const Template = (args) => <Splash {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  delay: 1,
-  duration: 1,
+  delay: 500,
+  duration: 500,
   children: (
     <div
       style={{
