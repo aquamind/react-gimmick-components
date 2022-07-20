@@ -2,8 +2,8 @@ import React, { CSSProperties, FC, ReactNode } from "react";
 import styles from "./style.module.css";
 
 type Props = {
-  delay: Number;
-  duration: Number;
+  delay: number;
+  duration: number;
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
@@ -16,8 +16,8 @@ const Splash: FC<Props> = ({ delay, duration, className, style, children }) => {
       style={{
         ...style,
         position: "fixed",
-        width: "100%",
-        height: "100%",
+        width: "100vw",
+        height: "100vh",
         top: 0,
         left: 0,
         margin: 0,

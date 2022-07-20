@@ -1,4 +1,3 @@
-import { ComponentStory } from "@storybook/react";
 import React from "react";
 import FadeIn from ".";
 
@@ -10,7 +9,7 @@ export default {
 const Template = (args) => <FadeIn {...args} />;
 
 const defaultArgs = {
-  visible: true,
+  action: true,
   duration: 500,
   children: (
     <div style={{ height: "50vh", width: "50vw", background: "#ff0000" }} />

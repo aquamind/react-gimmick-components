@@ -45,6 +45,7 @@ const drawerFactory =
         ref={ref}
         className={className}
         style={{
+          width: "fit-content",
           ...style,
           ...position,
           position: "fixed",

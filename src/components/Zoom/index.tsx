@@ -10,18 +10,16 @@ import React, {
 type Props = {
   action?: boolean;
   duration?: number;
-  x?: string;
-  y?: string;
+  scale?: number;
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
 };
 
-const FadeIn: FC<Props> = ({
+const Zoom: FC<Props> = ({
   action = true,
   duration = 1000,
-  x = "0",
-  y = "0",
+  scale = 0,
   children,
   className,
   style,
@@ -38,18 +36,25 @@ const FadeIn: FC<Props> = ({
     const element: HTMLElement = ref.current;
     element.animate(
       [
-        { opacity: 0, transform: `translate(${x}, ${y})` },
-        { opacity: 1, transform: "translate(0, 0)" },
+        {
+          opacity: 0,
+          transform: `scale(${scale})`,
+        },
+        { opacity: 1, transform: "scale(1)" },
       ],
       { duration, fill: "forwards" }
     );
   }, [action]);
 
   return (
-    <div ref={ref} className={className} style={style}>
+    <div
+      ref={ref}
+      className={className}
+      style={{ width: "fit-content", ...style }}
+    >
       {children}
     </div>
   );
 };
 
-export default FadeIn;
+export default Zoom;
