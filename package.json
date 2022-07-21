@@ -1,6 +1,6 @@
 {
   "name": "@aquamind/react-gimmick-components",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "React components",
   "scripts": {
     "build": "rollup -c",

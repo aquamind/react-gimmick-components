@@ -48,7 +48,7 @@ const FadeIn: FC<Props> = ({
   }, [action]);
 
   return (
-    <div ref={ref} className={className} style={style}>
+    <div ref={ref} className={className} style={{ ...style, opacity: 0 }}>
       {children}
     </div>
   );
