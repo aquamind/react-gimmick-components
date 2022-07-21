@@ -10,6 +10,7 @@ import React, {
 type Props = {
   action?: boolean;
   duration?: number;
+  delay?: number;
   perspective?: string;
   rotate?: string;
   children?: ReactNode;
@@ -22,6 +23,7 @@ const flipFactory =
   ({
     action = true,
     duration = 1000,
+    delay = 0,
     perspective = "none",
     rotate = "0",
     children,
@@ -45,7 +47,7 @@ const flipFactory =
           },
           { transform: `perspective(none) rotate${pivot}(0)` },
         ],
-        { duration, fill: "forwards" }
+        { duration, delay, fill: "forwards" }
       );
     }, [action]);
 

@@ -10,6 +10,7 @@ import React, {
 type Props = {
   action?: boolean;
   duration?: number;
+  delay?: number;
   x?: string;
   y?: string;
   children?: ReactNode;
@@ -20,6 +21,7 @@ type Props = {
 const FadeIn: FC<Props> = ({
   action = true,
   duration = 1000,
+  delay = 0,
   x = "0",
   y = "0",
   children,
@@ -41,7 +43,7 @@ const FadeIn: FC<Props> = ({
         { opacity: 0, transform: `translate(${x}, ${y})` },
         { opacity: 1, transform: "translate(0, 0)" },
       ],
-      { duration, fill: "forwards" }
+      { duration, delay, fill: "forwards" }
     );
   }, [action]);
 

@@ -10,6 +10,7 @@ import React, {
 type Props = {
   action?: boolean;
   duration?: number;
+  delay?: number;
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -21,7 +22,14 @@ const shutterFactory =
     endOrigin: "left" | "right" | "top" | "bottom",
     pivot: "X" | "Y"
   ): FC<Props> =>
-  ({ action = true, duration = 1000, children, className, style }) => {
+  ({
+    action = true,
+    duration = 1000,
+    delay = 0,
+    children,
+    className,
+    style,
+  }) => {
     const shutterRef = useRef(null);
     const wrapperRef = useRef(null);
     const [current, setCurrent] = useState<boolean>(false);
@@ -57,7 +65,7 @@ const shutterFactory =
             offset: 1,
           },
         ],
-        { duration, fill: "forwards" }
+        { duration, delay, fill: "forwards" }
       );
       const wrapper: HTMLElement = wrapperRef.current;
       wrapper.animate(
@@ -79,7 +87,7 @@ const shutterFactory =
             offset: 1,
           },
         ],
-        { duration, fill: "forwards" }
+        { duration, delay, fill: "forwards" }
       );
     }, [action]);
 

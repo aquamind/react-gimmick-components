@@ -10,6 +10,7 @@ import React, {
 type Props = {
   action?: boolean;
   duration?: number;
+  delay?: number;
   scale?: number;
   children?: ReactNode;
   className?: string;
@@ -19,6 +20,7 @@ type Props = {
 const Zoom: FC<Props> = ({
   action = true,
   duration = 1000,
+  delay = 0,
   scale = 0,
   children,
   className,
@@ -42,7 +44,7 @@ const Zoom: FC<Props> = ({
         },
         { opacity: 1, transform: "scale(1)" },
       ],
-      { duration, fill: "forwards" }
+      { duration, delay, fill: "forwards" }
     );
   }, [action]);
 
